@@ -6,6 +6,12 @@
       pkgs,
       lib,
     }:
-      import ./. {inherit pkgs lib;};
+      import ./lib.nix {inherit pkgs lib;};
+    nixosModules.default = {
+      imports = [
+        ./user.nix
+        ./podman.nix
+      ];
+    };
   };
 }
