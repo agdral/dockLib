@@ -57,9 +57,6 @@
         Description = "Podman initialization";
         After = ["default.target"];
       };
-      Install = {
-        WantedBy = ["default.target"];
-      };
     };
   };
 }
