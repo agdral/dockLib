@@ -1,7 +1,6 @@
 {...}: {
   users.users.podcal = {
     isNormalUser = true;
-    linger = true;
     home = "/home/podcal";
     uid = 1010;
     description = "podcal user";
