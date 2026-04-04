@@ -26,6 +26,7 @@
 
   systemd.services."getty@tty4" = {
     overrideStrategy = "asDropin";
+    wantedBy = ["getty.target"];
     serviceConfig.ExecStart = [
       ""
       "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${config.services.getty.loginProgram} --autologin podcal --noclear %I $TERM"
