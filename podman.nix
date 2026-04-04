@@ -12,6 +12,7 @@
       autoPrune.enable = true;
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
+      extraPackages = [pkgs.shadow];
     };
   };
 
@@ -23,23 +24,23 @@
     DefaultEnvironment="PATH=/run/current-system/sw/bin:/run/wrappers/bin:${lib.makeBinPath [pkgs.bash]}"
   '';
 
-  systemd.services."getty@tty4" = {
-    overrideStrategy = "asDropin";
-    serviceConfig.ExecStart = [
-      ""
-      "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${config.services.getty.loginProgram} --autologin podcal --noclear %I $TERM"
-    ];
-  };
+  # systemd.services."getty@tty4" = {
+  #   overrideStrategy = "asDropin";
+  #   serviceConfig.ExecStart = [
+  #     ""
+  #     "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${config.services.getty.loginProgram} --autologin podcal --noclear %I $TERM"
+  #   ];
+  # };
 
   home-manager.users.podcal = {
     services.podman.enable = true;
-    programs = {
-      bash.profileExtra = ''
-        sleep 20
-        dbus-update-activation-environment --systemd --all
-        systemctl --user start podman-init.target
-      '';
-    };
+    # programs = {
+    #   bash.profileExtra = ''
+    #     sleep 20
+    #     dbus-update-activation-environment --systemd --all
+    #     systemctl --user start podman-init.target
+    #   '';
+    # };
 
     home.packages = with pkgs; [
       podman
