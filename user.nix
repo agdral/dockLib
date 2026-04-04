@@ -1,5 +1,4 @@
 {...}: {
-  users.groups.podman = {};
   users.users.podcal = {
     isNormalUser = true;
     home = "/home/podcal";

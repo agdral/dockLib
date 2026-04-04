@@ -15,6 +15,10 @@
     };
   };
 
+  users.groups.podman = {
+    name = "podman";
+  };
+
   systemd.user.extraConfig = ''
     DefaultEnvironment="PATH=/run/current-system/sw/bin:/run/wrappers/bin:${lib.makeBinPath [pkgs.bash]}"
   '';
@@ -31,7 +35,7 @@
     services.podman.enable = true;
     programs = {
       bash.profileExtra = ''
-        sleep 15
+        sleep 20
         dbus-update-activation-environment --systemd --all
         systemctl --user start podman-init.target
       '';
