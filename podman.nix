@@ -41,7 +41,6 @@
     };
     programs = {
       bash.profileExtra = ''
-        sleep 15
         dbus-update-activation-environment --systemd --all
         systemctl --user start podman-init.target
       '';
