@@ -5,7 +5,7 @@
   mkPodmanService = {
     name,
     composeFile,
-    user,
+    user ? "podcal",
     enable ? true,
   }: {
     home-manager.users.${user}.systemd.user.services.${name} =
@@ -28,7 +28,7 @@
 
   mkAgenix = {
     name,
-    user,
+    user ? "podcal",
     envPath,
     dbPath ? null,
   }: {
