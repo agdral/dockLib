@@ -34,25 +34,16 @@
   };
 
   home-manager.users.podcal = {
-    xdg.configFile."containers/networks/proxy_network.json" = {
-      text = builtins.toJSON {
-        name = "proxy_network";
-        driver = "bridge";
-        network_interface = "proxy_network";
-        subnets = [
-          {
-            subnet = "10.100.0.0/24";
-            gateway = "10.100.0.1";
-          }
-        ];
-        ipv6_enabled = false;
-        internal = false;
-        dns_enabled = true;
-        ipam_options = {driver = "host-local";};
-      };
-    };
     services.podman = {
       enable = true;
+      networks = {
+        proxy_network = {
+          driver = "bridge";
+          subnet = "10.100.0.0/24";
+          gateway = "10.100.0.1";
+          extraPodmanArgs = ["--dns-enable=true"];
+        };
+      };
     };
     systemd.user.sessionVariables = {
       XDG_RUNTIME_DIR = "/run/user/1010";
