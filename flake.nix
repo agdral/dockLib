@@ -7,11 +7,7 @@
       lib,
     }:
       import ./lib.nix {inherit pkgs lib;};
-    nixosModules.default = {
-      imports = [
-        ./user.nix
-        ./podman.nix
-      ];
-    };
+    nixosModules.default.import = ./nixos.nix;
+    homeModules.default.import = ./home.nix;
   };
 }
