@@ -32,25 +32,23 @@
     envPath,
     dbPath ? null,
   }: {
-    age = {
-      identityPaths = ["/home/${user}/.ssh/containers/${name}"];
-      secrets =
-        {
-          "${name}-env" = {
-            file = "${envPath}";
-            owner = "${user}";
-            group = "users";
-            mode = "0400";
+    home-manager.users.${user} = {
+      age = {
+        identityPaths = ["/home/${user}/.ssh/containers/${name}"];
+        secrets =
+          {
+            "${name}-env" = {
+              file = "${envPath}";
+              owner = "${user}";
+            };
+          }
+          // lib.optionalAttrs (dbPath != null) {
+            "${name}-db" = {
+              file = "${dbPath}";
+              owner = "${user}";
+            };
           };
-        }
-        // lib.optionalAttrs (dbPath != null) {
-          "${name}-db" = {
-            file = "${dbPath}";
-            owner = "${user}";
-            group = "users";
-            mode = "0400";
-          };
-        };
+      };
     };
   };
 }
