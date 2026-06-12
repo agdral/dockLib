@@ -37,16 +37,10 @@
         identityPaths = ["/home/${user}/.ssh/containers/${name}"];
         secrets =
           {
-            "${name}-env" = {
-              file = "${envPath}";
-              owner = "${user}";
-            };
+            "${name}-env".file = "${envPath}";
           }
           // lib.optionalAttrs (dbPath != null) {
-            "${name}-db" = {
-              file = "${dbPath}";
-              owner = "${user}";
-            };
+            "${name}-db".file = "${dbPath}";
           };
       };
     };
