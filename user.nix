@@ -1,4 +1,4 @@
-{...}: {
+{agenix, ...}: {
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 0;
   };
@@ -29,6 +29,9 @@
   };
 
   home-manager.users.podcal = {
+    imports = [
+      agenix.homeManagerModules.default
+    ];
     home = {
       stateVersion = "26.05";
 
