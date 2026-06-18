@@ -1,17 +1,9 @@
 {
   description = "Podman service helpers";
 
-  outputs = {self}: {
-    lib = {
-      pkgs,
-      lib,
-    }:
-      import ./lib.nix {inherit pkgs lib;};
-    nixosModules.default = {
-      imports = [
-        ./user.nix
-        ./podman.nix
-      ];
-    };
+  outputs = {
+    nixosModules.default = import ./nixos.nix;
+    homeModules.default = import ./user.nix;
+    homeModules.lib = import ./lib.nix;
   };
 }

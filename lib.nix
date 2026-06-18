@@ -5,10 +5,9 @@
   mkPodmanService = {
     name,
     composeFile,
-    user ? "podcal",
     enable ? true,
   }: {
-    home-manager.users.${user}.systemd.user.services.${name} =
+    systemd.user.services.${name} =
       {
         Unit.PartOf = ["podman-init.target"];
         Service = {
@@ -32,17 +31,15 @@
     envPath,
     dbPath ? null,
   }: {
-    home-manager.users.${user} = {
-      age = {
-        identityPaths = ["/home/${user}/.ssh/containers/${name}"];
-        secrets =
-          {
-            "${name}-env".file = "${envPath}";
-          }
-          // lib.optionalAttrs (dbPath != null) {
-            "${name}-db".file = "${dbPath}";
-          };
-      };
+    age = {
+      identityPaths = ["/home/${user}/.ssh/containers/${name}"];
+      secrets =
+        {
+          "${name}-env".file = "${envPath}";
+        }
+        // lib.optionalAttrs (dbPath != null) {
+          "${name}-db".file = "${dbPath}";
+        };
     };
   };
 }
