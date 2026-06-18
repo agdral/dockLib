@@ -1,7 +1,7 @@
 {
   description = "Podman service helpers";
 
-  outputs = {
+  outputs = {self}: {
     nixosModules.default = import ./nixos.nix;
     homeModules.default = import ./user.nix;
     homeModules.lib = {
