@@ -1,11 +1,7 @@
 {
-  agenix,
   pkgs,
   ...
 }: {
-  imports = [
-    agenix.homeManagerModules.default
-  ];
   home = {
     stateVersion = "26.05";
 
