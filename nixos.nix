@@ -24,14 +24,14 @@
     DefaultEnvironment = "PATH=/run/current-system/sw/bin:/run/wrappers/bin:${lib.makeBinPath [pkgs.bash]}";
   };
 
-  systemd.services."getty@tty4" = {
-    overrideStrategy = "asDropin";
-    wantedBy = ["getty.target"];
-    serviceConfig.ExecStart = [
-      ""
-      "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${config.services.getty.loginProgram} --autologin podcal --noclear %I $TERM"
-    ];
-  };
+  # systemd.services."getty@tty4" = {
+  #   overrideStrategy = "asDropin";
+  #   wantedBy = ["getty.target"];
+  #   serviceConfig.ExecStart = [
+  #     ""
+  #     "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${config.services.getty.loginProgram} --autologin podcal --noclear %I $TERM"
+  #   ];
+  # };
 
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 0;
