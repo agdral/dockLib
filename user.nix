@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home = {
     stateVersion = "26.05";
 
@@ -53,6 +50,7 @@
     podman-compose
   ];
 
+  systemd.user.startServices = false;
   systemd.user.targets.podman-init = {
     Unit = {
       Description = "Podman initialization";
