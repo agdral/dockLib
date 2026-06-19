@@ -15,6 +15,7 @@
           ExecStop = "${pkgs.podman}/bin/podman compose -f ${composeFile} down";
           Restart = "on-failure";
         };
+        restartTriggers = [composeFile];
       }
       // (
         if enable

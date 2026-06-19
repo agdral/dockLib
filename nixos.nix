@@ -4,25 +4,25 @@
   lib,
   ...
 }: {
-  virtualisation = {
-    containers.enable = true;
-    oci-containers.backend = "podman";
-    podman = {
-      enable = true;
-      autoPrune.enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-      extraPackages = [pkgs.shadow];
-    };
-  };
-
-  users.groups.podman = {
-    name = "podman";
-  };
-
-  systemd.user.settings.Manager = {
-    DefaultEnvironment = "PATH=/run/current-system/sw/bin:/run/wrappers/bin:${lib.makeBinPath [pkgs.bash]}";
-  };
+  # virtualisation = {
+  #   containers.enable = true;
+  #   oci-containers.backend = "podman";
+  #   podman = {
+  #     enable = true;
+  #     autoPrune.enable = true;
+  #     dockerCompat = true;
+  #     defaultNetwork.settings.dns_enabled = true;
+  #     extraPackages = [pkgs.shadow];
+  #   };
+  # };
+  #
+  # users.groups.podman = {
+  #   name = "podman";
+  # };
+  #
+  # systemd.user.settings.Manager = {
+  #   DefaultEnvironment = "PATH=/run/current-system/sw/bin:/run/wrappers/bin:${lib.makeBinPath [pkgs.bash]}";
+  # };
 
   # systemd.services."getty@tty4" = {
   #   overrideStrategy = "asDropin";
