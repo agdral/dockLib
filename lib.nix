@@ -26,7 +26,8 @@
             then "${waitScript} ${toString dependsOn}"
             else "";
           ExecStart = "${pkgs.podman}/bin/podman compose -f ${composeFile} up";
-          ExecStop = "${pkgs.podman}/bin/podman compose -f ${composeFile} down";
+          ExecReload = "${pkgs.podman}/bin/podman compose -f ${composeFile} down";
+          ExecStop = "${pkgs.podman}/bin/podman compose -f ${composeFile} stop";
           Restart = "on-failure";
         };
       }
