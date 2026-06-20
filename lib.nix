@@ -6,11 +6,25 @@
     name,
     composeFile,
     enable ? true,
-  }: {
+    dependsOn ? [],
+  }: let
+    waitScript = pkgs.writeShellScript "wait-for-containers" ''
+      set -e
+      for container in "$@"; do
+        echo "Esperando que $container esté saludable..."
+        ${pkgs.podman}/bin/podman wait --condition=healthy "$container"
+        echo "$container está saludable!"
+      done
+    '';
+  in {
     systemd.user.services.${name} =
       {
         Unit.PartOf = ["podman-init.target"];
         Service = {
+          ExecStartPre =
+            if dependsOn != []
+            then "${waitScript} ${toString dependsOn}"
+            else "";
           ExecStart = "${pkgs.podman}/bin/podman compose -f ${composeFile} up";
           ExecStop = "${pkgs.podman}/bin/podman compose -f ${composeFile} down";
           Restart = "on-failure";

@@ -28,17 +28,7 @@
     };
   };
 
-  services.podman = {
-    enable = true;
-    # networks = {
-    #   proxy_network = {
-    #     driver = "bridge";
-    #     subnet = "10.100.0.0/24";
-    #     gateway = "10.100.0.1";
-    #     extraPodmanArgs = ["--dns-enable=true"];
-    #   };
-    # };
-  };
+  services.podman.enable = true;
 
   systemd.user.sessionVariables = {
     XDG_RUNTIME_DIR = "/run/user/1010";
