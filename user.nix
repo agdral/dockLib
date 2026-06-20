@@ -30,14 +30,14 @@
 
   services.podman = {
     enable = true;
-    networks = {
-      proxy_network = {
-        driver = "bridge";
-        subnet = "10.100.0.0/24";
-        gateway = "10.100.0.1";
-        extraPodmanArgs = ["--dns-enable=true"];
-      };
-    };
+    # networks = {
+    #   proxy_network = {
+    #     driver = "bridge";
+    #     subnet = "10.100.0.0/24";
+    #     gateway = "10.100.0.1";
+    #     extraPodmanArgs = ["--dns-enable=true"];
+    #   };
+    # };
   };
 
   systemd.user.sessionVariables = {
@@ -50,7 +50,6 @@
     podman-compose
   ];
 
-  systemd.user.startServices = false;
   systemd.user.targets.podman-init = {
     Unit = {
       Description = "Podman initialization";
